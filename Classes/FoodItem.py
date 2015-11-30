@@ -1,7 +1,7 @@
 
 class FoodItem:
 
-    def __int__(self, ndbNo, name, group, measurement, calories, CF, FF, PF, SF,):
+    def __int__(self, ndbNo, name, group, measurement, calories, CF, FF, PF, SF, quantity):
         self.ndbNo = ndbNo
         self.name = name
         self.group = group
@@ -11,6 +11,7 @@ class FoodItem:
         self.fats = FF
         self.proteins = PF
         self.sugars = SF
+        self.quantity = quantity
 
 
 
