@@ -11,8 +11,11 @@ class SearchController(object):
         results = SearchController.ndbAPI.getSearchResults(searchText)
         return results
 
-    #TODO: Should this be where we put the next portion of our API calls? Take desired search term and create object.
 
     def measurements(self, number):
         results = SearchController.ndbAPI.getFoodMeasurements(number)
+        return results
+
+    def getItem(self, ndbno, measurement, quantity, time):
+        results = SearchController.ndbAPI.getFoodItem(ndbno, measurement, quantity, time)
         return results

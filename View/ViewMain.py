@@ -47,11 +47,13 @@ class ViewMain(Frame):
         self.amountEntry.grid(column=0, row=1)
         self.timeEntry = ttk.Combobox(self, values=eatingList)
         self.timeEntry.grid(column=0, row=2)
+        self.quantEntry = ttk.Entry(self)
+        self.quantEntry.grid(column=2, row=1)
 
     #TODO: add commands!
     def insertButtons(self):
         self.searchButton = ttk.Button(self, text='Search', command=self.clickSearch).grid(column=2, row=0)
-        self.addButton = ttk.Button(self, text="Add Item").grid(column=2, row=2)
+        self.addButton = ttk.Button(self, text="Add Item", command=self.addItem).grid(column=2, row=2)
 
     def makeAllPadded(self):
         for child in self.winfo_children():
@@ -63,20 +65,24 @@ class ViewMain(Frame):
         control = SearchController()
         #get dictionary
         self.result = control.searchResults(searchText)
-        self.window=Mbox(self.master, list=result)
+        self.window=Mbox(self.master, list=self.result)
         self.master.wait_window(self.window.top)
         self.foodEntry.delete(0,END)
         self.foodEntry.insert(END, self.window.value)
         # result[self.window.value] - food number
-        measurements = control.measurements(result[self.window.value])
+        measurements = control.measurements(self.result[self.window.value])
         self.amountEntry.config(values=measurements)
 
         self.makeAllPadded()
 
 
     def addItem(self):
+        control = SearchController()
+        foodObject = control.getItem(self.result[self.window.value], self.amountEntry.get(), self.quantEntry.get(), self.timeEntry.get())
+        listName = foodObject.time + "List"
+        self.listName.insert(END, foodObject.name)
 
-        food = FoodItem(self.result, self.window.value, )
+
 
 
 

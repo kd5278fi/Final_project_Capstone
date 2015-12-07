@@ -54,7 +54,7 @@ class NdbAPI:
 
     #After all fields are complete and the ADD button is pushed, we make one last call to the API using the database
     #number to get all relevant information and create a food object to store on the SQL database
-    def getFoodItem(self, ndbno, measurement, quantity):
+    def getFoodItem(self, ndbno, measurement, quantity, time):
         data = requests.get("http://api.nal.usda.gov/ndb/reports/?ndbno=" + ndbno + "&type=f&format=json&api_key=" + self.secret)
         results = data.json()
         # Eac time we call .get on a dictionary, it returns a new dictionary from the first dictionary's children. Each
@@ -76,6 +76,7 @@ class NdbAPI:
         fats = ""
         proteins = ""
         sugars = ""
+
 
         #this portion runs through our nutrients dictionary, looks at the nutrient ID's, selects the ones we want then
         #assings the corresponding variable with the value from the dictionary.
@@ -102,7 +103,7 @@ class NdbAPI:
                         sugars = nut['value']
 
         #Builds new food object
-        foodStuff = FoodItem(ndbno, name, group, measurement, calories, carbs, fats, proteins, sugars, quantity)
+        foodStuff = FoodItem(ndbno, name, group, measurement, time, calories, carbs, fats, proteins, sugars, quantity)
 
         #returns food object
         return foodStuff
