@@ -12,11 +12,15 @@ class Mbox(object):
         self.scroll.config(command=self.listObj.yview)
         self.scroll.pack(side=RIGHT, fill=Y)
         self.listObj.pack(side=LEFT, fill=BOTH, expand=1)
-        for key in list:
-            self.listObj.insert(END, key)
+        for value in list:
+            self.listObj.insert(END, value)
         self.button = Button(top, text="ok", command=self.cleanup)
         self.button.pack()
 
     def cleanup(self):
         self.value=self.listObj.get(self.listObj.curselection())
+        # self.value2 = list["'" + self.listObj.get(self.listObj.curselection()) + "'"]
         self.top.destroy()
+
+
+        #list[value] gets number

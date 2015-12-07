@@ -74,6 +74,10 @@ class ViewMain(Frame):
         self.master.wait_window(self.window.top)
         self.foodEntry.delete(0,END)
         self.foodEntry.insert(END, self.window.value)
+        # result[self.window.value] - food number
+        measurements = control.measurements(result[self.window.value])
+        self.amountEntry.config(values=measurements)
+
 
     #
     # def entryValue(self):
