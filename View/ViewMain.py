@@ -57,19 +57,12 @@ class ViewMain(Frame):
         for child in self.winfo_children():
             child.grid_configure(padx=5, pady=5, ipadx=5, ipady=5)
 
-    # def addFoodItem(self):
-    #
-    #     newFoodstring = foodItem.measurement + " - " + obj.name
-    #     listName = foodItem. + "List"
-    #
-    #     self.listName.insert(END, newFoodstring)
-
     def clickSearch(self):
 
         searchText = self.foodEntry.get()
         control = SearchController()
         #get dictionary
-        result = control.searchResults(searchText)
+        self.result = control.searchResults(searchText)
         self.window=Mbox(self.master, list=result)
         self.master.wait_window(self.window.top)
         self.foodEntry.delete(0,END)
@@ -78,12 +71,14 @@ class ViewMain(Frame):
         measurements = control.measurements(result[self.window.value])
         self.amountEntry.config(values=measurements)
 
+        self.makeAllPadded()
 
-    #
-    # def entryValue(self):
-    #     return self.window.value
-    #
-    #
+
+    def addItem(self):
+
+        food = FoodItem(self.result, self.window.value, )
+
+
 
 
 

@@ -1,12 +1,13 @@
 
 import requests
 from Classes import FoodItem
+from API.keys import *
 
 # this class will initialize and control the primary API object
 class NdbAPI:
 
     def __init__(self):
-        self.secret = "f9xkUkjirn4BIMQVyPczFkfvXWPU188r78wfVZdU"
+        self.secret = key
         #TODO: hide the secret in the ignore file, Matt help?
 
 
