@@ -1,6 +1,6 @@
 
 import requests
-from Classes import FoodItem
+from Classes.FoodItem import *
 from API.keys import *
 
 # this class will initialize and control the primary API object
@@ -8,8 +8,6 @@ class NdbAPI:
 
     def __init__(self):
         self.secret = key
-        #TODO: hide the secret in the ignore file, Matt help?
-
 
     # My project will have a feature that allows a person to search for a term and see a list of choices that
     #are closest to their search term. The following method uses the API's search function to make this list
@@ -81,25 +79,25 @@ class NdbAPI:
         #this portion runs through our nutrients dictionary, looks at the nutrient ID's, selects the ones we want then
         #assings the corresponding variable with the value from the dictionary.
         for item in nutrients:
-            if item['nutrient_id'] == "208": # calorie code
+            while item['nutrient_id'] == "208": # calorie code
                 for nut in item['measures']:
-                    if nut['label'] == measurement:
+                    while nut['label'] == measurement:
                         calories = nut['value']
-            elif item['nutrient_id'] == "203": # protein code
+            while item['nutrient_id'] == "203": # protein code
                 for nut in item['measures']:
-                    if nut['label'] == measurement:
+                    while nut['label'] == measurement:
                         proteins = nut['value']
-            elif item['nutrient_id'] == "204": #fats/lipids code
+            while item['nutrient_id'] == "204": #fats/lipids code
                 for nut in item['measures']:
-                    if nut['label'] == measurement:
+                    while nut['label'] == measurement:
                         fats = nut['value']
-            elif item['nutrient_id'] == "205": #carbohydrates code
+            while item['nutrient_id'] == "205": #carbohydrates code
                 for nut in item['measures']:
-                    if nut['label'] == measurement:
+                    while nut['label'] == measurement:
                         carbs = nut['value']
-            elif item['nutrient_id'] == "269": #sugars code
+            while item['nutrient_id'] == "269": #sugars code
                 for nut in item['measures']:
-                    if nut['label'] == measurement:
+                    while nut['label'] == measurement:
                         sugars = nut['value']
 
         #Builds new food object
