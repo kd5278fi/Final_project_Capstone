@@ -41,5 +41,5 @@ class FoodItem:
     def proMod(self):
         return self.quantity * self.proteins
 
-    def SugMod(self):
+    def sugMod(self):
         return self.quantity * self.sugars
