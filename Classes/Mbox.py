@@ -4,7 +4,7 @@ import sys
 class Mbox(object):
 
     def __init__(self, master, list=None):
-        top=self.top=Toplevel(master)
+        top = self.top = Toplevel(master)
         self.label = Label(top, text="Please pick a food item:")
         self.label.pack()
         self.scroll = Scrollbar(top, orient=VERTICAL)
@@ -18,9 +18,6 @@ class Mbox(object):
         self.button.pack()
 
     def cleanup(self):
-        self.value=self.listObj.get(self.listObj.curselection())
+        self.value = self.listObj.get(self.listObj.curselection())
         # self.value2 = list["'" + self.listObj.get(self.listObj.curselection()) + "'"]
         self.top.destroy()
-
-
-        #list[value] gets number

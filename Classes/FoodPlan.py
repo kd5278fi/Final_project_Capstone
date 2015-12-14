@@ -10,3 +10,6 @@ class FoodPlan:
         self.proteinGoal = pros
         self.sugarGoal = sugars
 
+    def displayText(self):
+        return "Calorie Goal: " + str(self.calorieGoal) + '\nProtein Goal: ' + str(self.proteinGoal) + '\nCarbohydrate Goal: ' + str(self.carbGoal) +\
+                '\nFats Goal: ' + str(self.fatsGoal) + '\nSugar Goal: ' + str(self.sugarGoal)
