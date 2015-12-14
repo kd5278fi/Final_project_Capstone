@@ -23,6 +23,9 @@ class FoodItem:
         self.quantity = quantity
 
     def displayName(self):
-        return self.measurement + " " + self.name
+        if self.quantity > 1:
+            return self.name + " - " + self.quantity + " " + self.measurement + "s"
+        else:
+            return self.name + " - " + self.quantity + " " + self.measurement
 
 #TODO: create methods for controlling object.

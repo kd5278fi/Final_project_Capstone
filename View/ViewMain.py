@@ -61,6 +61,7 @@ class ViewMain(Frame):
     def insertButtons(self):
         self.searchButton = ttk.Button(self, text='Search', command=self.clickSearch).grid(column=2, row=0)
         self.addButton = ttk.Button(self, text="Add Item", command=self.addItem).grid(column=2, row=2)
+        self.quitButton = ttk.Button(self, text='Quit', command=self.saveDay). grid(column=2, row=13)
 
     def makeAllPadded(self):
         for child in self.winfo_children():
@@ -94,13 +95,13 @@ class ViewMain(Frame):
 
     def findTimeSlot(self, object):
         if object.time == "Breakfast":
-            self.BreakfastList.insert(END, object.name)
+            self.BreakfastList.insert(END, object.displayName())
         elif object.time == "Lunch":
-            self.LunchList.insert(END, object.name)
+            self.LunchList.insert(END, object.displayName())
         elif object.time == "Snack":
-            self.SnackList.insert(END, object.name)
+            self.SnackList.insert(END, object.displayName())
         elif object.time == "Dinner":
-            self.DinnerList.insert(END, object.name)
+            self.DinnerList.insert(END, object.displayName())
 
     def adjustCaloriesForTime(self, object):
         if object.time == "Breakfast":
@@ -119,7 +120,7 @@ class ViewMain(Frame):
     def loadDay(self):
         foodLoad = self.control.loadDay(datetime.date.today())
         for item in foodLoad:
-            food = FoodItem(item [0], item[1], item[2], item[3], item[4], item[5],item[6], item[7], item[8], item[9], item[10])
+            food = FoodItem(item[1], item[2], item[3], item[4], item[5],item[6], item[7], item[8], item[9], item[10], item[11])
 
             # TUPLE: (2, 1001, u'corn', u'starch', u'cup', u'dinner', 100, 100, 90, 90, 80)
             self.findTimeSlot(food)

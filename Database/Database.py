@@ -14,7 +14,7 @@ class Database:
 
     def setupTables(self):
         self.createTodayTable()
-        self.testInfo()
+        # self.testInfo()
         # self.testDB()
 
     def testDB(self):
@@ -31,7 +31,7 @@ class Database:
                             (ndbNO, name, grouptype, measurement, time,
                             calories, carbs, fats, proteins, sugars, quantity)
                             VALUES
-                            (1001, 'corn', 'starch', 'cup', 'dinner',
+                            (1001, 'corn', 'starch', 'cup', 'Dinner',
                             100, 100, 90, 90, 80, 2);''')
         self.conn.commit()
 
@@ -67,6 +67,7 @@ class Database:
             print("IO Error")
 
     def save(self, items):
-        for food in items:
-            self.cursor.execute('INSERT INTO ?(ndbNO, name, grouptype, measurement, time, calories, carbs, fats, proteins, sugars, quantity) VALUES (?,?,?,?,?,?,?,?,?,?,?) ', (self.today, food.ndbNO, food.name, food.group, food.measurement, food.time, food.calories, food.carbs, food.fats, food.proteins, food.sugars, food.quantity))
-            self.conn.commit()
+        if (len(items) != 0):
+            for food in items:
+                self.cursor.execute('INSERT INTO ?(ndbNO, name, grouptype, measurement, time, calories, carbs, fats, proteins, sugars, quantity) VALUES (?,?,?,?,?,?,?,?,?,?,?) ', (self.today, food.ndbNO, food.name, food.group, food.measurement, food.time, food.calories, food.carbs, food.fats, food.proteins, food.sugars, food.quantity))
+                self.conn.commit()
