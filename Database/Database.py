@@ -69,5 +69,5 @@ class Database:
     def save(self, items):
         if (len(items) != 0):
             for food in items:
-                self.cursor.execute('INSERT INTO ?(ndbNO, name, grouptype, measurement, time, calories, carbs, fats, proteins, sugars, quantity) VALUES (?,?,?,?,?,?,?,?,?,?,?) ', (self.today, food.ndbNO, food.name, food.group, food.measurement, food.time, food.calories, food.carbs, food.fats, food.proteins, food.sugars, food.quantity))
+                self.cursor.execute('INSERT INTO ' + self.today + ' (ndbNO, name, grouptype, measurement, time, calories, carbs, fats, proteins, sugars, quantity) VALUES (?,?,?,?,?,?,?,?,?,?,?) ', (food.ndbNO, food.name, food.group, food.measurement, food.time, food.calories, food.carbs, food.fats, food.proteins, food.sugars, food.quantity))
                 self.conn.commit()

@@ -25,6 +25,10 @@ class MiddleMan(object):
 
     def saveDay(self):
         MiddleMan.db.save(self.foodList)
+        list = []
+        for food in self.foodList:
+            list.append(food.ndbNO)
+        return list
 
     def loadDay(self, date):
         results = MiddleMan.db.selectAllFromDate(date)

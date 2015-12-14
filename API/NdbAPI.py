@@ -69,36 +69,38 @@ class NdbAPI:
         #setting up variables for our food object
         name = results.get('report').get('food')['name']
         group = results.get('report').get('food')['fg']
-        calories = ""
-        carbs = ""
-        fats = ""
-        proteins = ""
-        sugars = ""
+        calories = 0
+        carbs = 0
+        fats = 0
+        proteins = 0
+        sugars = 0
 
 
         #this portion runs through our nutrients dictionary, looks at the nutrient ID's, selects the ones we want then
         #assings the corresponding variable with the value from the dictionary.
-        for item in nutrients:
-            while item['nutrient_id'] == "208": # calorie code
-                for nut in item['measures']:
-                    while nut['label'] == measurement:
-                        calories = nut['value']
-            while item['nutrient_id'] == "203": # protein code
-                for nut in item['measures']:
-                    while nut['label'] == measurement:
-                        proteins = nut['value']
-            while item['nutrient_id'] == "204": #fats/lipids code
-                for nut in item['measures']:
-                    while nut['label'] == measurement:
-                        fats = nut['value']
-            while item['nutrient_id'] == "205": #carbohydrates code
-                for nut in item['measures']:
-                    while nut['label'] == measurement:
-                        carbs = nut['value']
-            while item['nutrient_id'] == "269": #sugars code
-                for nut in item['measures']:
-                    while nut['label'] == measurement:
-                        sugars = nut['value']
+        for i in range(0, len(results.get('report').get('food').get('nutrients'))):
+            if results.get('report').get('food').get('nutrients')[i].get('nutrient_id') == 208:
+                for b in range(0,len(results.get('report').get('food').get('nutrients')[i].get('measures'))):
+                    if results.get('report').get('food').get('nutrients')[i].get('measures')[b].get('label') == measurement:
+                       calories = results.get('report').get('food').get('nutrients')[i].get('measures')[b].get("value")
+            if results.get('report').get('food').get('nutrients')[i].get('nutrient_id') == 203:
+                for b in range(0,len(results.get('report').get('food').get('nutrients')[i].get('measures'))):
+                    if results.get('report').get('food').get('nutrients')[i].get('measures')[b].get('label') == measurement:
+                       proteins = results.get('report').get('food').get('nutrients')[i].get('measures')[b].get("value")
+            if results.get('report').get('food').get('nutrients')[i].get('nutrient_id') == 204:
+                for b in range(0,len(results.get('report').get('food').get('nutrients')[i].get('measures'))):
+                    if results.get('report').get('food').get('nutrients')[i].get('measures')[b].get('label') == measurement:
+                       fats = results.get('report').get('food').get('nutrients')[i].get('measures')[b].get("value")
+            if results.get('report').get('food').get('nutrients')[i].get('nutrient_id') == 205:
+                for b in range(0,len(results.get('report').get('food').get('nutrients')[i].get('measures'))):
+                    if results.get('report').get('food').get('nutrients')[i].get('measures')[b].get('label') == measurement:
+                       carbs = results.get('report').get('food').get('nutrients')[i].get('measures')[b].get("value")
+            if results.get('report').get('food').get('nutrients')[i].get('nutrient_id') == 269:
+                for b in range(0,len(results.get('report').get('food').get('nutrients')[i].get('measures'))):
+                    if results.get('report').get('food').get('nutrients')[i].get('measures')[b].get('label') == measurement:
+                       sugars = results.get('report').get('food').get('nutrients')[i].get('measures')[b].get("value")
+
+
 
         #Builds new food object
         foodStuff = FoodItem(ndbno, name, group, measurement, time, calories, carbs, fats, proteins, sugars, quantity)
