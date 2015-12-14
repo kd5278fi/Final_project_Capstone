@@ -119,7 +119,10 @@ class ViewMain(Frame):
     def loadDay(self):
         foodLoad = self.control.loadDay(datetime.date.today())
         for item in foodLoad:
-            self.findTimeSlot(item)
+            food = FoodItem(item [0], item[1], item[2], item[3], item[4], item[5],item[6], item[7], item[8], item[9], item[10])
+
+            # TUPLE: (2, 1001, u'corn', u'starch', u'cup', u'dinner', 100, 100, 90, 90, 80)
+            self.findTimeSlot(food)
 
     def saveDay(self):
         if tkMessageBox.askyesno("Save", "Would you like to save all of this data?"):
