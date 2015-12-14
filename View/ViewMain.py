@@ -12,6 +12,7 @@ class ViewMain(Frame):
     LunchCal = 0
     SnackCal = 0
     DinnerCal = 0
+    TotalCal = 0
 
     def __init__(self, master = None, date = datetime.datetime.now()):
         Frame.__init__(self, master)
@@ -31,33 +32,32 @@ class ViewMain(Frame):
         self.firstSep.grid(column=0, row=3, sticky=(W, N, E),columnspan=3)
         self.BreakfastList = Listbox(self, height=3, width=30)
         self.BreakfastList.grid(column=0, row=4, columnspan=2, sticky=W)
-        self.breakCals = ttk.Label(self, text="Breakfast Calories:")
+        self.breakCals = ttk.Label(self, text="Breakfast Calories: " + str(self.BreakCal))
         self.breakCals.grid(column=2, row=4)
         self.secondSep = ttk.Separator(self).grid(column=0, row=5, sticky=(W, N, E), columnspan=3)
         self.LunchList = Listbox(self, height=3, width=30)
         self.LunchList.grid(column=0, row=6, columnspan=2, sticky=W)
-        self.lunchCals = ttk.Label(self, text="Lunch Calories:")
+        self.lunchCals = ttk.Label(self, text="Lunch Calories: " + str(self.LunchCal))
         self.lunchCals.grid(column=2, row=6)
         self.thirdSep = ttk.Separator(self).grid(column=0, row=7, sticky=(W, N, E), columnspan=3)
         self.SnackList = Listbox(self, height=3, width=30)
         self.SnackList.grid(column=0, row=8, columnspan=2, sticky=W)
-        self.snackCals = ttk.Label(self, text="Snack Calories:")
+        self.snackCals = ttk.Label(self, text="Snack Calories: " + str(self.SnackCal))
         self.snackCals.grid(column=2, row=8)
         self.fourthSep = ttk.Separator(self).grid(column=0, row=9, sticky=(W, N, E), columnspan=3)
         self.DinnerList = Listbox(self, height=3, width=30)
         self.DinnerList.grid(column=0, row=10, columnspan=2, sticky=W)
-        self.dinnerCals = ttk.Label(self, text="Dinner Calories:")
+        self.dinnerCals = ttk.Label(self, text="Dinner Calories: " + str(self.DinnerCal))
         self.dinnerCals.grid(column=2, row=10)
         self.finalSep = ttk.Separator(self).grid(column=0, row=11, sticky=(W, N, E), columnspan=3)
-        self.totalCalories = ttk.Label(self, text="Total calories:")
+        self.totalCalories = ttk.Label(self, text="Total calories: " + str(self.TotalCal))
         self.totalCalories.grid(column=0, row=12)
 
     def insertEntryFrames(self):
-        foodList = ['1 Cup', '1 Slice', '3 Grams']
         eatingList = ['Breakfast', 'Lunch', 'Snack', 'Dinner']
         self.foodEntry = ttk.Entry(self,width=23)
         self.foodEntry.grid(column=0, row=0)
-        self.amountEntry = ttk.Combobox(self, values = foodList)
+        self.amountEntry = ttk.Combobox(self, values = [])
         self.amountEntry.grid(column=0, row=1)
         self.timeEntry = ttk.Combobox(self, values=eatingList)
         self.timeEntry.grid(column=0, row=2)
@@ -89,13 +89,12 @@ class ViewMain(Frame):
 
         self.makeAllPadded()
 
-
     def addItem(self):
 
         foodObject = self.control.getItem(self.result[self.window.value], self.amountEntry.get(), self.quantEntry.get(), self.timeEntry.get())
         self.findTimeSlot(foodObject)
         self.adjustCaloriesForTime(foodObject)
-
+        self.clearEntries()
 
         # self.mess = tkMessageBox.showinfo("Object info", foodObject.ndbNo + "\n" + foodObject.name + "\n" +  foodObject.group + "\n" +  foodObject.measurement + "\n" +  foodObject.time + "\n" +  str(foodObject.calories) + "\n" + str(foodObject.carbs) + "\n" +  str(foodObject.fats) + "\n" +  str(foodObject.proteins) + "\n" +  str(foodObject.sugars) + "\n" +  str(foodObject.quantity))
 
@@ -140,6 +139,12 @@ class ViewMain(Frame):
         else:
             exit()
 
+    def clearEntries(self):
+        self.foodEntry.delete(0, END)
+        self.amountEntry.delete(0, END)
+        self.amountEntry.config(values=[])
+        self.timeEntry.delete(0, END)
+        self.foodEntry.focus()
 
 
 
