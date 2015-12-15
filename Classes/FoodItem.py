@@ -22,6 +22,7 @@ class FoodItem:
         #how many of this item was consumed, to use for multiplying nutritional values
         self.quantity = int(quantity)
 
+    # if serving is plural, adds S to end of measurements
     def displayName(self):
 
         if self.quantity == 1:
@@ -29,6 +30,7 @@ class FoodItem:
         else :
             return self.name + " - " + str(self.quantity) + " " + self.measurement + "s"
 
+    #Modifies nutrients depending on serving size
     def calMod(self):
         return self.quantity * self.calories
 
