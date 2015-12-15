@@ -21,16 +21,23 @@ class NdbAPI:
         parameters = {"format":"json", "q":search, "sort":"r", "max":20, "offset":0, "api_key": self.secret}
         #Rewuest module takes the url and the parameters and stores the Json response. If we queried what
         #data is right now, it would only give us a code with a response from the web server
-        #TODO: use the web response to try/catch for error handeling
-        data = requests.get("http://api.nal.usda.gov/ndb/search/", params=parameters)
-        #take the results from json and turn into dictionary
-        results = data.json()
-        #runs through dictionary and pulls all the names and their database numbers
-        for item in results['list']['item']:
-            #adds to resultsDictionary
-            resultsDict[item['name']] = item['ndbno']
-        #returns Dictionary Object
-        return resultsDict
+        #TODO: use the web response to try/catch for error handeling, use error codes and requests.exceptions
+        try:
+            data = requests.get("http://api.nal.usda.gov/ndb/search/", params=parameters)
+
+            #take the results from json and turn into dictionary
+            results = data.json()
+            #runs through dictionary and pulls all the names and their database numbers
+
+
+            for item in results['list']['item']:
+                #adds to resultsDictionary
+                resultsDict[item['name']] = item['ndbno']
+            #returns Dictionary Object
+            return resultsDict
+
+        except requests.exceptions.ConnectTimeout as e:
+            print "nope"
 
 
     #Once an item is selected, a drop down menu will be populated with the measurement types included in the web

@@ -31,6 +31,7 @@ class ViewMain(Frame):
         self.makeAllPadded()
         self.loadDay()
 
+#TODO: Apply theme
     def insertDisplayFrames(self):
         self.foodLabel = ttk.Label(self, text="Food Item").grid(column=1, row=0, sticky=W)
         self.amountLabel = ttk.Label(self, text='Amount').grid(column=3, row=0, sticky=W)
@@ -39,7 +40,7 @@ class ViewMain(Frame):
         self.firstSep = ttk.Separator(self)
         self.firstSep.grid(column=0, row=3, sticky=(W, N, E),columnspan=6)
         self.BreakfastList = Listbox(self, height=3, width=80)
-        self.BreakfastList.grid(column=0, row=4, columnspan=4)
+        self.BreakfastList.grid(column=0, row=4, columnspan=4, sticky=W)
         self.breakCals = ttk.Label(self, text="Breakfast Calories: " + str(self.BreakCal))
         self.breakCals.grid(column=4, row=4)
         self.secondSep = ttk.Separator(self).grid(column=0, row=5, sticky=(W, N, E), columnspan=5)
@@ -90,14 +91,17 @@ class ViewMain(Frame):
         for child in self.winfo_children():
             child.grid_configure(padx=5, pady=5, ipadx=5, ipady=5)
 
+#TODO: handle empty list
     def clickSearch(self):
 
         searchText = self.foodEntry.get()
 
         #get dictionary
         self.result = self.control.searchResults(searchText)
+
         self.window=Mbox(self.master, list=self.result)
         self.master.wait_window(self.window.top)
+
         self.foodEntry.delete(0,END)
         self.foodEntry.insert(END, self.window.value)
         # result[self.window.value] - food number
@@ -115,7 +119,7 @@ class ViewMain(Frame):
         self.clearEntries()
 
         # self.mess = tkMessageBox.showinfo("Object info", foodObject.ndbNo + "\n" + foodObject.name + "\n" +  foodObject.group + "\n" +  foodObject.measurement + "\n" +  foodObject.time + "\n" +  str(foodObject.calories) + "\n" + str(foodObject.carbs) + "\n" +  str(foodObject.fats) + "\n" +  str(foodObject.proteins) + "\n" +  str(foodObject.sugars) + "\n" +  str(foodObject.quantity))
-
+#TODO: condense following three methods
     def findTimeSlot(self, object):
         if object.time == "Breakfast":
             self.BreakfastList.insert(END, object.displayName())
